@@ -14,9 +14,39 @@ body{font-family:Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Rob
 .profile-card{display:flex;gap:12px;align-items:center;padding:12px;background:var(--glass);border-radius:8px}
 .avatar,.post-avatar{width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,#2b6cb0,#1d9bf0);display:flex;align-items:center;justify-content:center;font-weight:700}
 .menu{margin-top:12px;display:flex;flex-direction:column;gap:8px}
-.menu-item{padding:10px;border-radius:8px;color:var(--muted);text-decoration:none;cursor:pointer}
+.menu-item{
+  padding:10px;
+  border-radius:8px;
+  color:var(--muted);
+  text-decoration:none;
+  cursor:pointer;
+  background:transparent;
+  border:none;
+  font-size:inherit;
+  text-align:left;
+  width:100%;
+  transition:all 0.2s ease
+}
+.menu-item:hover{
+  background:rgba(255,255,255,0.02);
+  color:#fff
+}
 .menu-item.active{background:rgba(255,255,255,0.02);color:#fff}
 .feed{min-height:200px}
+.empty-state{
+  background:var(--card);
+  padding:24px;
+  border-radius:12px;
+  text-align:center
+}
+.empty-state h2{
+  margin:0 0 8px;
+  color:#fff
+}
+.empty-state p{
+  margin:0;
+  color:var(--muted)
+}
 .composer{background:var(--card);padding:12px;border-radius:10px;margin-bottom:12px}
 .composer textarea{width:100%;background:transparent;border:1px solid rgba(255,255,255,0.04);border-radius:8px;color:inherit;padding:10px}
 .composer-row{display:flex;justify-content:space-between;align-items:center;margin-top:8px}

@@ -51,6 +51,7 @@ function formatTime(ts) {
 }
 
 export default function App() {
+  const [currentView, setCurrentView] = useState('home')
   const [posts, setPosts] = useState(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY)
@@ -129,47 +130,85 @@ export default function App() {
           </div>
 
           <nav className="menu">
-            <a className="menu-item active">Home</a>
-            <a className="menu-item">Explore</a>
-            <a className="menu-item">Notifications</a>
-            <a className="menu-item">Messages</a>
+            <button 
+              className={`menu-item ${currentView === 'home' ? 'active' : ''}`}
+              onClick={() => setCurrentView('home')}
+            >
+              Home
+            </button>
+            <button 
+              className={`menu-item ${currentView === 'explore' ? 'active' : ''}`}
+              onClick={() => setCurrentView('explore')}
+            >
+              Explore
+            </button>
+            <button 
+              className={`menu-item ${currentView === 'notifications' ? 'active' : ''}`}
+              onClick={() => setCurrentView('notifications')}
+            >
+              Notifications
+            </button>
+            <button 
+              className={`menu-item ${currentView === 'messages' ? 'active' : ''}`}
+              onClick={() => setCurrentView('messages')}
+            >
+              Messages
+            </button>
           </nav>
         </aside>
 
         <section className="feed">
-          <div className="composer">
-            <textarea
-              placeholder="What's happening?"
-              rows={3}
-              value={composer}
-              onChange={(e) => setComposer(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
-                  handleCreatePost()
-                }
-              }}
-            ></textarea>
-            <div className="composer-row">
-             
-              <div>
-                <button className="btn" onClick={() => setComposer('')}>Clear</button>
-                <button className="btn primary" onClick={handleCreatePost} style={{ marginLeft: 8 }}>Post</button>
+          {(currentView === 'home' || currentView === 'explore') && (
+            <>
+              <div className="composer">
+                <textarea
+                  placeholder="What's happening?"
+                  rows={3}
+                  value={composer}
+                  onChange={(e) => setComposer(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+                      handleCreatePost()
+                    }
+                  }}
+                ></textarea>
+                <div className="composer-row">
+                  
+                  <div>
+                    <button className="btn" onClick={() => setComposer('')}>Clear</button>
+                    <button className="btn primary" onClick={handleCreatePost} style={{ marginLeft: 8 }}>Post</button>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
 
-          <div className="posts">
-            {posts.map((p) => (
-              <Post
-                key={p.id}
-                post={{ ...p, time: formatTime(p.createdAt) }}
-                onLike={() => toggleLike(p.id)}
-                onComment={() => addComment(p.id)}
-                onRepost={() => addRepost(p.id)}
-                onDelete={() => deletePost(p.id)}
-              />
-            ))}
-          </div>
+              <div className="posts">
+                {posts.map((p) => (
+                  <Post
+                    key={p.id}
+                    post={{ ...p, time: formatTime(p.createdAt) }}
+                    onLike={() => toggleLike(p.id)}
+                    onComment={() => addComment(p.id)}
+                    onRepost={() => addRepost(p.id)}
+                    onDelete={() => deletePost(p.id)}
+                  />
+                ))}
+              </div>
+            </>
+          )}
+
+          {currentView === 'notifications' && (
+            <div className="empty-state">
+              <h2>Notifications</h2>
+              <p>You have no new notifications</p>
+            </div>
+          )}
+
+          {currentView === 'messages' && (
+            <div className="empty-state">
+              <h2>Messages</h2>
+              <p>No messages</p>
+            </div>
+          )}
         </section>
 
         <aside className="trends">
