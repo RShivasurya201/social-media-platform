@@ -1,6 +1,6 @@
 # Mini Twitter — Dashboard (frontend only)
 
-This is a small frontend-only dashboard with hardcoded posts. It's a Vite + React static site ready to deploy to Vercel.
+This is a small frontend-only dashboard built with Vite + React. It includes a working composer so users can create posts in the browser; all post data is stored locally (in localStorage) and no backend is required.
 
 Quick start
 
@@ -34,7 +34,13 @@ vercel login
 vercel --prod
 ```
 
+How the local composer works
+
+- Type into the composer textarea and click Post (or press Ctrl/Cmd+Enter) to create a new post. New posts appear at the top of the feed.
+- Posts, likes, comments and repost counts are stored in your browser's `localStorage` under the key `mini_twitter_posts_v1` so they persist across reloads on the same browser.
+- Action buttons (comment/repost/like/delete) work in-memory and update counts immediately. Deleting a post removes it from local storage.
+
 Notes
 
-- Posts are hardcoded in `src/App.jsx`.
-- This is frontend-only (no backend). The composer UI is non-functional and provided for layout/demo only.
+- The app is frontend-only and uses localStorage for persistence — there is no server or user authentication.
+- If you want posts to be shared across users or devices, the next step is to add a backend API.

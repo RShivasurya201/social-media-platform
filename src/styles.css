@@ -28,8 +28,12 @@ body{font-family:Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Rob
 .post-meta-top{display:flex;gap:8px;align-items:center}
 .muted{color:var(--muted);font-size:13px}
 .post-content{margin-top:6px}
-.post-actions{display:flex;gap:16px;margin-top:10px;color:var(--muted);font-size:14px}
+.post-actions{display:flex;gap:12px;margin-top:10px;color:var(--muted);font-size:14px}
+.post-actions .action{display:inline-flex;align-items:center;padding:6px 8px;border-radius:8px;background:transparent;border:none;color:inherit;cursor:pointer}
+.post-actions .action:hover{background:rgba(255,255,255,0.02);color:#fff}
+.post-actions .action .icon{margin-right:6px}
 .action{display:flex;gap:8px;align-items:center}
+.post-actions .action.liked{color:var(--accent)}
 .trends .card{background:var(--card);padding:12px;border-radius:12px}
 
 @media (max-width: 980px){
